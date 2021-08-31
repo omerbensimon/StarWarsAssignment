@@ -3,14 +3,13 @@ import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import axios from "axios";
+import MovieFilterIcon from '@material-ui/icons/MovieFilter';
 import { getSelectedtFilmURL, setSelectedtFilmURL } from '../../utils/cookie'
 
 const drawerWidth = 240;
@@ -63,7 +62,9 @@ function Sidebar(props) {
 			<List>
 				{filmsList.map((film, index) => (
 					<ListItem button key={index + 1} onClick={() => handleClick(film)}>
-						<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+						<ListItemIcon>
+							<MovieFilterIcon />
+						</ListItemIcon>
 						<ListItemText primary={film.title} />
 					</ListItem>
 				))}

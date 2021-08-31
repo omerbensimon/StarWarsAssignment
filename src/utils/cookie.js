@@ -1,15 +1,32 @@
 import Cookies from 'js-cookie';
-const cookie_name = 'SELECTED-FILM';
+const selected_film_name = 'SELECTED-FILM';
+const favorite_film_name = 'FAVORITE-FILMS';
 
 export function getSelectedtFilmURL() {
-	return Cookies.get(cookie_name);
+	return Cookies.get(selected_film_name);
 }
-
 export function setSelectedtFilmURL(url) {
-	Cookies.set(cookie_name, url, { expires: 7 });
+	Cookies.set(selected_film_name, url, { expires: 7 });
 }
 
-export function deleteSelectedtFilmURL() {
-	Cookies.remove(cookie_name);
+
+export function getFavoriteFilms() {
+	let value = Cookies.get(favorite_film_name);
+	if (value === undefined) {
+		value = [];
+	} else {
+		value = JSON.parse(value);
+	}
+	return value;
+}
+export function setFavouriteFilm(url, add) {
+	let favFilms = getFavoriteFilms();
+	if (add) {
+		favFilms.push(url);
+	} else {
+		const existingIndex = favFilms.findIndex(val => val === url);
+		favFilms.splice(existingIndex, 1);
+	}
+	Cookies.set(favorite_film_name, JSON.stringify(favFilms), { expires: 7 });
 }
 
